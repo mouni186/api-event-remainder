@@ -1,22 +1,68 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const controllerRepo = require('./repo/controller.repo');
+const { nanoid } = require('nanoid');
 
 
-const controller = require('./controller/index')
-const validator = require('./middleware/validation')
-const sanitizer = require('./middleware/sanitization')
+const remainderSignup = async (req, res) => {
+
+    try {
+        const userData = {
+            email: req.body.email,
+            name: req.body.name,
+            password: req.body.password,
+            userNanoid: nanoid(8)
+        }
+
+        const result = await controllerRepo.remainderSignupDetails(userData);
+        res.status(result.status).send(result);
+    }
+    catch (error) {
+        console.log("Function Name:remainderSignup --> " + error);
+    }
+}
 
 
-app.use(bodyParser.json());
-app.use(cors());
+const remainderLogin = async (req, res) => {
 
-app.get('./add-remainder',controller.remainderScheduler);
+    try {
+        const loginData = {
+            email: req.body.email,
+            password: req.body.password
+        }
+
+        const result = await controllerRepo.remainderLoginDetails(loginData);
+        res.status(result.status).send(result);
+    }
+    catch (error) {
+        console.log("Function name:remainderLogin --> " + error);
+    }
+}
+
+
+const remainderDetails = async (req, res) => {
+
+    try {
+        const remainderData = {
+            userNanoid: req.body.userNanoid,
+            title: req.body.title,
+            description: req.body.description,
+            date: req.body.date,
+            time: req.body.time
+        }
+
+        const result = await controllerRepo.userRemainder(remainderData);
+        res.status(result.status).send(result);
+    }
+    catch (error) {
+        console.log("Function name:remainderDetails --> " + error);
+    }
+}
 
 
 
-const port = process.env.PORT || 6000;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-})
+
+
+module.exports = {
+    remainderDetails,
+    remainderSignup,
+    remainderLogin
+}
