@@ -1,6 +1,7 @@
 const CRUDOperationInDynamodb = require('./repo/CRUD.repo');
 
 
+
 const signupDetails = async (data) => {
     let returnObject;
 
@@ -125,12 +126,12 @@ const userRemainderDetails = async (data) => {
                     title: data.title,
                     description: data.description,
                     date: data.date,
-                    time: data.time
+                    time: data.time,
+                    remainderNanoid:data.remainderNanoid
                 }
             }
 
             const result = await CRUDOperationInDynamodb.createRecordInDynamodb(params);
-            console.log(result.Item);
             returnObject = {
                 message: "Remainder added successfully",
                 status: 200

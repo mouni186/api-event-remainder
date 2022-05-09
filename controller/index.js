@@ -46,7 +46,8 @@ const remainderDetails = async (req, res) => {
             title: req.body.title,
             description: req.body.description,
             date: req.body.date,
-            time: req.body.time
+            time: req.body.time,
+            remainderNanoid:nanoid(8)
         }
 
         const result = await controllerRepo.userRemainder(remainderData);
@@ -57,7 +58,9 @@ const remainderDetails = async (req, res) => {
     }
 }
 
+const viewRemainder = async(req,res) => {
 
+}
 
 
 

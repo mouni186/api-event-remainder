@@ -16,7 +16,7 @@ app.use(cors());
 app.post('/remainder-signup',controller.remainderSignup);  //email,name,password                            --
 app.post('/remainder-login',controller.remainderLogin);    //email,password                                userid
 app.post('/add-remainder',controller.remainderDetails);    //userid,title,description,date,time              -
-
+// app.post('/view-remainder',controller.viewRemainder);
 
 
 const port = process.env.PORT || 6000;
